@@ -4,7 +4,9 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const schema = new mongoose.Schema({
   role: {
-    enum: ["User", "Organisation"]
+    type: String,
+    enum: ["User", "Organisation"],
+    default: "User"
   },
   email: {
     type: String,
