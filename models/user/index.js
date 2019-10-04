@@ -1,30 +1,39 @@
 "use strict";
-
 const mongoose = require("mongoose");
+const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const schema = new mongoose.Schema({
+  role: {
+    enum: ["User", "Organisation"]
+  },
   email: {
     type: String,
-    required: true,
-    lowercase: true,
     trim: true,
+    required: true,
     unique: true
   },
-  name: {
+  password: {
     type: String,
     required: true,
     trim: true
   },
-  password: {
+  username: {
     type: String,
-    required: true
-  }
-  // role: {
-  //   type: String,
-  //   required: true,
-  //   enum: ["user", "editor", "admin"],
-  //   default: "user"
-  // }
+    required: true,
+    trim: true,
+    unique: true
+  },
+  imageUrl: {
+    type: String,
+    default: "../images/default-user-icon-4.jpg"
+  },
+  _donationPost: [
+    {
+      type: ObjectId,
+      default: "",
+      ref: "DonationPost"
+    }
+  ]
 });
 
 const signInStatic = require("./statics/sign-in");
