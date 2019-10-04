@@ -1,40 +1,54 @@
-import React, { Fragment } from "react";
-
-import { Link } from "react-router-dom";
-
+import React, { Component } from "react";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
-import { withRouter } from "react-router";
+import Nav from "react-bootstrap/Nav";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import bringLogo from "../assets/bring2.svg";
+import { LinkContainer } from "react-router-bootstrap";
 
-const BlogNavbar = props => {
-  return (
-    <Navbar>
-      <Link className="btn" to="/">
-        Blog
-      </Link>
-      {(!props.user && (
-        <Fragment>
-          <Link className="btn" to="/sign-in">
-            Sign In
-          </Link>
-          <Link className="btn" to="/sign-up">
-            Sign Up
-          </Link>
-        </Fragment>
-      )) || (
-        <Fragment>
-          <span className="btn">{props.user.name}</span>
-          <Link className="btn" to="/post/create">
-            + Create a Post
-          </Link>
-          <Form onSubmit={props.signOut}>
-            <Button type="submit">Sign Out</Button>
-          </Form>
-        </Fragment>
-      )}
-    </Navbar>
-  );
-};
+export class NavigationBar extends Component {
+  render() {
+    return (
+      <div>
+        <Navbar bg="light" fixed="top" expand="lg">
+          <Navbar.Brand href="#home">
+            <img
+              src={bringLogo}
+              width="40"
+              height="40"
+              className="d-inline-block align-top"
+              alt="React Bootstrap logo"
+            />
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <LinkContainer to="/">
+                <Nav.Link href="#home">Home</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/foo/bar">
+                <Nav.Link href="#link">Our Mission</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/foo/bar">
+                <Nav.Link href="#link">Donate</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/foo/bar">
+                <Nav.Link href="#link">Parcipate as an institution</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/signin">
+                <Nav.Link href="#link">Sign in as a Donor</Nav.Link>
+              </LinkContainer>
+              <LinkContainer to="/signin">
+                <Nav.Link href="#link">Sign in as a Volunteer</Nav.Link>
+              </LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
+    );
+  }
+}
 
-export default withRouter(BlogNavbar);
+export default NavigationBar;
